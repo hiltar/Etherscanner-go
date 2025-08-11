@@ -7,6 +7,7 @@ import (
     "math/big"
     "net/http"
     "os"
+    "strconv"
     "time"
 )
 
@@ -17,16 +18,25 @@ type Response struct {
 }
 
 func main() {
-    if len(os.Args) != 3 {
-        fmt.Println("Usage: go run main.go <address> <apikey>")
+    if len(os.Args) < 3 || len(os.Args) > 4 {
+        fmt.Println("Usage: go run main.go <address> <apikey> [<chainid>]")
         os.Exit(1)
     }
 
     address := os.Args[1]
     apikey := os.Args[2]
+    chainid := 1
+    if len(os.Args) == 4 {
+        var err error
+        chainid, err = strconv.Atoi(os.Args[3])
+        if err != nil {
+            fmt.Printf("Invalid chainid: %v\n", err)
+            os.Exit(1)
+        }
+    }
 
     for {
-        url := fmt.Sprintf("https://api.etherscan.io/v2/api?chainid=1&module=account&action=balance&address=%s&tag=latest&apikey=%s", address, apikey)
+        url := fmt.Sprintf("https://api.etherscan.io/v2/api?chainid=%d&module=account&action=balance&address=%s&tag=latest&apikey=%s", chainid, address, apikey)
 
         resp, err := http.Get(url)
         if err != nil {

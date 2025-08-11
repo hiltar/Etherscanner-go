@@ -3,7 +3,8 @@ This CLI program will fetch etherscan V2 API every 120 seconds and returns balan
 
 # Usage
 `./etherscanner <address> <API-key> [chainid]`  
-`chainid` argument is optional, default is `1`
+`chainid` argument is optional, default is `1`  
+ChainID can be found from ![Supported Chains](https://docs.etherscan.io/etherscan-v2/supported-chains)
 
 ## Output
 ```

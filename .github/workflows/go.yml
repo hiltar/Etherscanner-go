@@ -1,0 +1,40 @@
+name: etherscanner
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Grant write access to repository contents for release uploads
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.24'
+        
+    - name: Build
+      run: |
+        go mod init etherscanner
+        go mod tidy
+        CGO_ENABLED=0 GOOS=linux go build -a -ldflags="-s -w" -o etherscanner
+        upx --best etherscanner
+    - name: Upload etherscanner as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: etherscanner
+        path: etherscanner
+    
+    - name: Upload to GitHub Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: etherscanner
+        draft: true

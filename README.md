@@ -4,7 +4,7 @@ This CLI program will fetch etherscan V2 API every 120 seconds and returns balan
 # Usage
 `./etherscanner <address> <API-key> [chainid]`  
 `chainid` argument is optional, default is `1`  
-ChainID can be found from ![Supported Chains](https://docs.etherscan.io/etherscan-v2/supported-chains)
+ChainID can be found from [Supported Chains](https://docs.etherscan.io/etherscan-v2/supported-chains)
 
 ## Output
 ```
@@ -12,7 +12,7 @@ Balance: 0.001172726557641221 ETH
 ```
 
 # Obtain API key from etherscan
-Register into etherscan.io and create an API-key from ![API Dashboard](https://etherscan.io/apidashboard).
+Register into etherscan.io and create an API-key from [API Dashboard](https://etherscan.io/apidashboard).
 
 # Build
 ```

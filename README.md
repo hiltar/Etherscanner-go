@@ -2,7 +2,8 @@
 This CLI program will fetch etherscan V2 API every 120 seconds and returns balance of Ethereum in the address.
 
 # Usage
-`./etherscanner <address> <API-key>`
+`./etherscanner <address> <API-key> [chainid]`  
+`chainid` argument is optional, default is `1`
 
 ## Output
 ```
